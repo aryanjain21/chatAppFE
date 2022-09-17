@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import './config/axiosConfig';
 import HomePage from './Pages/HomePage';
 import ChatPage from './Pages/ChatPage';
 
