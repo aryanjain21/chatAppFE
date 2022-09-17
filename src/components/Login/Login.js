@@ -1,7 +1,7 @@
-import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react';
-import React, { useState } from 'react'
-import { signIn } from '../../services/api';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react';
 
 const Login = () => {
 
@@ -30,10 +30,16 @@ const Login = () => {
         }
 
         try {
-            const { data } = await signIn({
+            const config = {
+                headers: {
+                  "Content-type": "application/json",
+                },
+            };
+
+            const { data } = await axios.post(`${process.env.REACT_APP_BACKEND}/api/user/login`, {
                 email,
                 password,
-            });
+            }, config);
 
             toast({
                 title: "Login Successful",

@@ -84,7 +84,7 @@ const MyChats = ({ fetchAgain }) => {
         borderRadius="lg"
         overflowY="hidden"
       >
-        {chats.length > 0 ? (
+        {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => (
               <Box
