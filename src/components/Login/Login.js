@@ -8,8 +8,8 @@ const Login = () => {
     const toast = useToast();
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -55,7 +55,7 @@ const Login = () => {
         } catch (error) {
             toast({
                 title: "Error Occured!",
-                description: error.response.data.message,
+                description: error?.response?.data?.message,
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -75,7 +75,7 @@ const Login = () => {
                 <Input
                     value={email}
                     placeholder='Enter Your Email'
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e?.target?.value?.trim())}
                 />
             </FormControl>
             <FormControl id="login-password" isRequired>
@@ -85,7 +85,7 @@ const Login = () => {
                         value={password}
                         type={!show ? 'password' : 'text'}
                         placeholder='Enter Your Password'
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e?.target?.value?.trim())}
                     />
                     <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleClick}>

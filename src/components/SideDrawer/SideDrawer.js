@@ -165,20 +165,27 @@ const SideDrawer = () => {
                             placeholder="Search by name or email"
                             mr={2}
                             value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => setSearch(e?.target?.value?.trim())}
                         />
                         <Button onClick={handleSearch}>Go</Button>
                     </Box>
                     {loading ? (
                         <ChatLoading />
                     ) : (
-                        searchResult?.map((user) => (
+                        searchResult?.length > 0 ?searchResult?.map((user) => (
                             <UserListItem
                                 key={user._id}
                                 user={user}
                                 handleFunction={() => accessChat(user._id)}
                             />
-                        ))
+                        )) : <Box fontSize={'14px'}
+                        lineHeight={'18px'}
+                        color={'orange'}
+                        mt={'8px'}
+                        padding={'4px'}
+                        backgroundColor={'lightgoldenrodyellow'}>
+                            No User found, Please enter correct Name
+                        </Box>
                     )}
                     {loadingChat && <Spinner ml="auto" display="flex" />}
                 </DrawerBody>

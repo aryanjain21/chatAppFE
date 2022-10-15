@@ -11,12 +11,13 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState();
     const [pic, setPic] = useState();
     const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const toast = useToast();
     const navigate = useNavigate();
 
-    const handleClick = () => setShow(!show);
+    const handleClick = (isPass) => isPass ? setShow(!show) : setShowConfirm(!showConfirm);
 
     const postDetails = (pics) => {
         setLoading(true);
@@ -117,7 +118,7 @@ const Signup = () => {
         } catch (error) {
             toast({
                 title: "Error Occured!",
-                description: error.response.data.message,
+                description: error?.response?.data?.message,
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -136,14 +137,14 @@ const Signup = () => {
                 <FormLabel>Name</FormLabel>
                 <Input
                     placeholder='Enter Your Name'
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setName(e?.target?.value?.trim())}
                 />
             </FormControl>
             <FormControl id="email" isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input
                     placeholder='Enter Your Email'
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e?.target?.value?.trim())}
                 />
             </FormControl>
             <FormControl id="password" isRequired>
@@ -152,10 +153,10 @@ const Signup = () => {
                     <Input
                         type={!show ? 'password' : 'text'}
                         placeholder='Enter Your Password'
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e?.target?.value.trim())}
                     />
                     <InputRightElement width="4.5rem">
-                        <Button h="1.75rem" size="sm" onClick={handleClick}>
+                        <Button h="1.75rem" size="sm" onClick={() => handleClick(true)}>
                             {show ? "Hide" : "Show"}
                         </Button>
                     </InputRightElement>
@@ -165,13 +166,13 @@ const Signup = () => {
                 <FormLabel>Confirm Password</FormLabel>
                 <InputGroup>
                     <Input
-                        type={!show ? 'password' : 'text'}
+                        type={!showConfirm ? 'password' : 'text'}
                         placeholder='Enter Your Password'
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={(e) => setConfirmPassword(e?.target?.value?.trim())}
                     />
                     <InputRightElement width="4.5rem">
-                        <Button h="1.75rem" size="sm" onClick={handleClick}>
-                            {show ? "Hide" : "Show"}
+                        <Button h="1.75rem" size="sm" onClick={() => handleClick(false)}>
+                            {showConfirm ? "Hide" : "Show"}
                         </Button>
                     </InputRightElement>
                 </InputGroup>
